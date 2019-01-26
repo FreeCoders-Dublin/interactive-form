@@ -23,20 +23,21 @@ $("#other-title").parent().fadeOut( "slow" );
 
 $("#colors-js-puns").hide();
 
+
 $("#design").change(function () {
-    //$( "#color" ).focus();
+    $('#color').val('select-color');
     if ($("#design").val() === "js puns") {
     $("#colors-js-puns").show();
     $("#color").children().hide();
-    $("#color").children("option").eq(0).show();
     $("#color").children("option").eq(1).show();
     $("#color").children("option").eq(2).show();
+    $("#color").children("option").eq(3).show();
 } else if ($("#design").val() === "heart js") {
     $("#colors-js-puns").show();
     $("#color").children().hide();
-    $("#color").children("option").eq(3).focus().show();
     $("#color").children("option").eq(4).show();
     $("#color").children("option").eq(5).show();
+    $("#color").children("option").eq(6).show();
 } else {$("#colors-js-puns").hide();
 }
 });
@@ -59,22 +60,27 @@ $activities.on('click', 'input', function(event) {
     $(this).parent().css("color", 'black');
   } else if (checkbox.innerText.indexOf('Tuesday 9am') >= 0 && $(this).is(':checked') === false) {
     $('.activities label:contains("Tuesday 9am")').children().removeAttr("disabled");
-    $('.activities label:contains("Tuesday 9am")').parent().css("color", "black");
+    $('.activities label:contains("Tuesday 9am")').css("color", "black");
   }
 
   if (checkbox.innerText.indexOf('Tuesday 1pm') >= 0 && $(this).is(':checked')) {
     $('.activities label:contains("Tuesday 1pm")').children().attr("disabled", true);
+    $('.activities label:contains("Tuesday 1pm")').css("color", "gray");
     $(this).removeAttr("disabled");
+    $(this).parent().css("color", 'black');
   } else if (checkbox.innerText.indexOf('Tuesday 1pm') >= 0 && $(this).is(':checked') === false) {
     $('.activities label:contains("Tuesday 1pm")').children().removeAttr("disabled");
+    $('.activities label:contains("Tuesday 1pm")').css("color", "black");
   }
 
+  totalValue = 0;
   $('.activities input:checked').each(function(i){
-    let match = $('.activities input:checked').parent()[i].innerText;
-    // match = match.find('JavaScript');
-    $('.total-to-pay').text(match);
+    let totalNumber = $('.activities input:checked').parent()[i].innerText;
+    totalNumber = totalNumber.match(/\$\d+/)[0];
+    totalNumber = totalNumber.replace('$', '');
+    totalValue += parseInt(totalNumber);
   })
-
+    $('.total-to-pay').text(totalValue);
 }
 );
 //
