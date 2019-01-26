@@ -1,3 +1,25 @@
+/// T-SHIRT
+
+$("#colors-js-puns").hide();
+
+$("#design").change(function () {
+    //$( "#color" ).focus();
+    if ($("#design").val() === "js puns") {
+    $("#colors-js-puns").show();
+    $("#color").children().hide();
+    $("#color").children("option").eq(0).show();
+    $("#color").children("option").eq(1).show();
+    $("#color").children("option").eq(2).show(); 
+} else if ($("#design").val() === "heart js") {
+    $("#colors-js-puns").show();
+    $("#color").children().hide();
+    $("#color").children("option").eq(3).focus().show();
+    $("#color").children("option").eq(4).show();
+    $("#color").children("option").eq(5).show();
+} else {$("#colors-js-puns").hide();
+}
+});
+
 // To show the correct section releted to the selected payment.
 $('#payment').val('credit card').change(function() {
     switch ($('#payment').val()) {
