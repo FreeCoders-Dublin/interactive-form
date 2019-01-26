@@ -94,6 +94,30 @@ input:focus {
 	background: #fff;
 	border-color: #5e97b0;
 	transition: border-color .4s, background-color .4s;
+	outline: none;
+	font-size: 1em;
+	font-weight: 500;
+	padding: .8em;
+}
+
+.error {
+	background: rgb(255, 154, 154);
+	border: 2px solid rgb(252, 104, 104);
+}
+
+.error:focus {
+	background: rgb(255, 170, 170);
+	border-color: #cf0c0c;
+}
+
+.correct {
+	background: rgb(161, 255, 173);
+	border: 2px solid rgb(104, 252, 124);
+}
+
+.correct:focus {
+	background: rgb(187, 255, 170);
+	border-color: #84cf0c;
 }
 
 input[type="checkbox"],
