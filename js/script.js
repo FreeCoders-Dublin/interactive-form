@@ -1,12 +1,12 @@
 //when the page loads the first field is focused by default
-const name = document.querySelector('#name');
-const eMail =  document.querySelector('#mail');
-const titleField = document.querySelector('#title');
+const name = $('#name');
+const eMail =  $('#mail');
+const titleField = $('#title');
 const testerEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 $('#name').focus();
 $("#other-title").parent().hide();
-titleField.addEventListener('click', (element) => {
+titleField.on('click', (element) => {
 //quando otherjobs viene clicckato
 if(element.target.value === 'other') {
 //rimuovi hide da other jobs
