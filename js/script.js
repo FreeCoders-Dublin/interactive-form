@@ -25,20 +25,27 @@ if(testerEmail.test(eMail.value)) {
 	eMail.classList.add('focus-error');
 }
 
+/// T-SHIRT
 
+$("#colors-js-puns").hide();
 
-
-
-
- //Name field can't be blank
-// Email field must be a validly formatted e-mail address (you don't have to check that it's a real e-mail address,
-//just that it's formatted like one: dave@teamtreehouse.com for example.
-//extra credito
-
-//real time error message
-//give to the user instructions while in typing in the field
-
-
+$("#design").change(function () {
+    //$( "#color" ).focus();
+    if ($("#design").val() === "js puns") {
+    $("#colors-js-puns").show();
+    $("#color").children().hide();
+    $("#color").children("option").eq(0).show();
+    $("#color").children("option").eq(1).show();
+    $("#color").children("option").eq(2).show();
+} else if ($("#design").val() === "heart js") {
+    $("#colors-js-puns").show();
+    $("#color").children().hide();
+    $("#color").children("option").eq(3).focus().show();
+    $("#color").children("option").eq(4).show();
+    $("#color").children("option").eq(5).show();
+} else {$("#colors-js-puns").hide();
+}
+});
 
 let totalValue = 0;
 const $totalValueTag = $(`<h2 class="total">Total: $<span class ="total-to-pay">${totalValue}</span></div>`);
