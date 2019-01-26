@@ -126,3 +126,4 @@ tester($('#cvv'),/^\d{3}$/);
 tester($('#zip'),/^\d{5}$/);
 tester($('#cc-num'),/^\d{13,16}$/);
 tester(eMail,testerEmail);
+tester(name, /\w[^\d]/)
