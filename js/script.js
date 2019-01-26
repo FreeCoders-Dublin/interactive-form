@@ -17,13 +17,7 @@ if(element.target.value === 'other') {
 //aggiungi hide a other-jobs
 $("#other-title").parent().fadeOut( "slow" );
 }
-})
-//when name or e0-mail is sumbitted uncorrectly you should haiglight the missing filed
-if(testerEmail.test(eMail.value)) {
-	console.log('corretta')
-} else {
-	eMail.classList.add('focus-error');
-}
+});
 
 /// T-SHIRT
 
@@ -109,6 +103,7 @@ const tester = ($input, regex) => {
     $input.keyup(function(event){
         if($input.val() === "") {
             $input.removeClass('error');
+            $input.removeClass('correct');
         } else {
             if(regex.test($input.val())) {
                 $input.removeClass('error');
@@ -124,3 +119,4 @@ const tester = ($input, regex) => {
 tester($('#cvv'),/^\d{3}$/);
 tester($('#zip'),/^\d{5}$/);
 tester($('#cc-num'),/^\d{13,16}$/);
+tester(eMail,testerEmail);
