@@ -104,12 +104,15 @@ $('#payment').val('credit card').change(function() {
     }
 });
 
+
+
 // it showes the user if the {{input}} matches the {{regex}}.
-const tester = ($input, regex) => {
+const tester = ($input, regex, text) => {
     $input.keyup(function(event){
         if($input.val() === "") {
             $input.removeClass('error');
             $input.removeClass('correct');
+
         } else {
             if(regex.test($input.val())) {
                 $input.removeClass('error');
@@ -117,13 +120,14 @@ const tester = ($input, regex) => {
             } else {
                 $input.removeClass('correct');
                 $input.addClass('error');
+                console.log(text);
             }
         }
     });
 }
 
-tester($('#cvv'),/^\d{3}$/);
-tester($('#zip'),/^\d{5}$/);
-tester($('#cc-num'),/^\d{13,16}$/);
-tester(eMail,testerEmail);
-tester(name, /\w[^\d]/)
+tester($('#cvv'),/^\d{3}$/, "Insert 3 Security Digits from the back of your card");
+tester($('#zip'),/^\d{5}$/, "Insert valid 5 number ZIP Code");
+tester($('#cc-num'),/^\d{13,16}$/, "Insert a valid 13 to 15 digits credit card number");
+tester(eMail,testerEmail, "Insert valid email");
+tester(name, /\w[^\d]/, "Insert a name");
