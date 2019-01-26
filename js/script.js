@@ -1,3 +1,8 @@
+$('input').each(function() {
+  $(this).addClass('empty')
+});
+
+
 //when the page loads the first field is focused by default
 const name = $('#name');
 const eMail =  $('#mail');
@@ -104,30 +109,42 @@ $('#payment').val('credit card').change(function() {
     }
 });
 
-
-
 // it showes the user if the {{input}} matches the {{regex}}.
-const tester = ($input, regex, text) => {
+const tester = ($input, regex, id) => {
     $input.keyup(function(event){
         if($input.val() === "") {
+            $(id).css('display','none');
+            $input.addClass('empty');
             $input.removeClass('error');
             $input.removeClass('correct');
-
         } else {
             if(regex.test($input.val())) {
-                $input.removeClass('error');
-                $input.addClass('correct');
+              $(id).css('display','none');
+              $input.removeClass('error');
+              $input.addClass('correct');
+              $input.removeClass('empty');
             } else {
+                $(id).css('display','block');
                 $input.removeClass('correct');
                 $input.addClass('error');
-                console.log(text);
+                  // $input.prev().append('<span class="fixed">  test</span>');
             }
         }
     });
 }
 
-tester($('#cvv'),/^\d{3}$/, "Insert 3 Security Digits from the back of your card");
-tester($('#zip'),/^\d{5}$/, "Insert valid 5 number ZIP Code");
-tester($('#cc-num'),/^\d{13,16}$/, "Insert a valid 13 to 15 digits credit card number");
-tester(eMail,testerEmail, "Insert valid email");
-tester(name, /\w[^\d]/, "Insert a name");
+// it showes the user if the {{input}} matches the {{regex}}.
+
+
+tester($('#cvv'),/^\d{3}$/, "#cvv-error");
+tester($('#zip'),/^\d{5}$/, "#zip-error");
+tester($('#cc-num'),/^\d{13,16}$/, "#cc-error");
+tester(eMail,testerEmail, "#email-error");
+tester(name, /\w[^\d]/, "#name-error");
+
+
+$('button').click(function() {
+  if(document.querySelector('empty')) {
+    console.log('w la figa');
+  }
+})
