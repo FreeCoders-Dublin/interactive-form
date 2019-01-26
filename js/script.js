@@ -19,12 +19,16 @@ $('#payment').val('credit card').change(function() {
 // it showes the user if the {{input}} matches the {{regex}}.
 const tester = ($input, regex) => {
     $input.keyup(function(event){
-        if(regex.test($input.val())) {
+        if($input.val() === "") {
             $input.removeClass('error');
-            $input.addClass('correct');
         } else {
-            $input.removeClass('correct');
-            $input.addClass('error');
+            if(regex.test($input.val())) {
+                $input.removeClass('error');
+                $input.addClass('correct');
+            } else {
+                $input.removeClass('correct');
+                $input.addClass('error');
+            }
         }
     });
 }
