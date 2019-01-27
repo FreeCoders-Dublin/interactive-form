@@ -24,10 +24,9 @@ $("#other-title").parent().fadeOut( "slow" );
 }
 });
 
-/// T-SHIRT
+/// T-SHIRT --- hide and show T-shirt options (design and color)
 
 $("#colors-js-puns").hide();
-
 
 $("#design").change(function () {
     $('#color').val('select-color');
@@ -47,7 +46,25 @@ $("#design").change(function () {
 }
 });
 
-// Activities Section
+// red error message pops up when users don't select all mandatory fields
+const tshirtVerification = () => {
+    if ( ($("#design").val() === "select theme") || (!$("#color").val()) ) {
+        $(".shirt").append( "<span id='select-tshirt'>Please select a valid option</span>");
+        return false;
+    } else {
+		return true;
+	}
+}
+
+// remove error message from the DOM
+$("#design").focus(function() {
+   $("#select-tshirt").remove();
+});
+
+$("#color").focus(function() {
+    $("#select-tshirt").remove();
+ });
+
 let totalValue = 0;
 const $totalValueTag = $(`<h3 class='total-label'>Total: $ <span class='total-value'>${totalValue}</span></h3>`);
 
@@ -156,8 +173,9 @@ tester(name, /\w[^\d]/)
 $('button').click(function( event ) {
     event.preventDefault(); // it prevents the refresh of the page.
     const paymentOK = paymentVerification();
+    const tshirtOK = tshirtVerification();
     // const yourPartOK = runyourfunction();
-    if(paymentOK) { // add your variable here with a && operator
+    if(paymentOK && tshirtOK) { // add your variable here with a && operator
         // form submitted!
         $('form').append(`<span style="color:green;">
         The form has been submitted! <span>`); // TODO: make sure to add only one message!
