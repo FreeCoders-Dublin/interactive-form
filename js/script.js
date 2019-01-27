@@ -24,6 +24,25 @@ $("#other-title").parent().fadeOut( "slow" );
 }
 });
 
+
+
+const generalInfoVerification = () => { // verify the field are not empty and with a correct value
+    let nameIsVerified = /\w[^\d]/.test($('#name').val());
+    let emailIsVerified = testerEmail.test($('#mail').val());
+    if(nameIsVerified && emailIsVerified) { // everthing is verified
+        return true;
+    } else { // return false and menage the error messages
+        nameIsVerified ? $('#name').addClass('correct') : $('#name').addClass('error');
+        emailIsVerified ? $('#mail').addClass('correct') : $('#mail').addClass('error');
+        return false;
+    }
+}
+
+
+
+
+
+
 /// T-SHIRT --- hide and show T-shirt options (design and color)
 
 $("#colors-js-puns").hide();
@@ -183,8 +202,9 @@ $('button').click(function( event ) {
     const paymentOK = paymentVerification();
     const tshirtOK = tshirtVerification();
     const activitiesOK = activitiesVerification();
+    const generalInfoOK = generalInfoVerification();
     // const yourPartOK = runyourfunction();
-    if(paymentOK && tshirtOK && activitiesOK) { // add your variable here with a && operator
+    if(paymentOK && tshirtOK && activitiesOK && generalInfoOK) { // add your variable here with a && operator
         // form submitted!
         $('form').append(`<span style="color:green;">
         The form has been submitted! <span>`); // TODO: make sure to add only one message!
