@@ -64,6 +64,10 @@ legend {
 	margin-bottom: 1.125em;
 }
 
+#select-tshirt {
+	color: red;
+}
+
 input[type="text"],
 input[type="email"],
 legend {

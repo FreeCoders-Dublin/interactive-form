@@ -19,10 +19,9 @@ $("#other-title").parent().fadeOut( "slow" );
 }
 });
 
-/// T-SHIRT
+/// T-SHIRT --- hide and show T-shirt options (design and color)
 
 $("#colors-js-puns").hide();
-
 
 $("#design").change(function () {
     $('#color').val('select-color');
@@ -40,6 +39,21 @@ $("#design").change(function () {
     $("#color").children("option").eq(6).show();
 } else {$("#colors-js-puns").hide();
 }
+});
+
+// red error message pops up when users don't select all mandatory fields
+const tshirtVerification = () => {
+    if ( ($("#design").val() === "select theme") || (!$("#color").val()) ) {
+        $(".shirt").append( "<span id='select-tshirt'>Please select a valid option</span>");
+        return false;
+    } else {
+		return true;
+	}
+}
+
+// remove error message from the DOM
+$("#design").focus(function() {
+   $("#select-tshirt").remove();
 });
 
 let totalValue = 0;
