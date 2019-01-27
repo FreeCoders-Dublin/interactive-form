@@ -75,10 +75,8 @@ $('.activities').on('change', 'input', function(event) {
     $('.total-value').hide().fadeIn('slow');
   } else if ($('.activities input:checked').length === 0) {
     $('.total-value').fadeOut('slow');
-    $('.total-label').addClass('empty');
   } else {
     $('.total-value').hide().fadeIn('slow');
-    $('.total-label').removeClass('empty');
   }
 
   if ($(this).parent()[0].innerText.indexOf("Tuesday 9am") >= 0 && $(this).is(':checked')) {
@@ -105,6 +103,16 @@ $('.activities').on('change', 'input', function(event) {
     $('.total-value').text(totalValue);
 }
 );
+
+const activitiesVerification = () => {
+  let activitiesIsVerified = $('.total-value').text() > 0;
+  if(activitiesIsVerified) {
+    return true;
+  } else {
+    activitiesIsVerified ? $('.total-label').addClass('correct') : $('.total-label').addClass('alert'), $('.activities').append('<span class="alert">Select at least one activity</span>');
+    return false;
+  }
+}
 
 // To show the correct section releted to the selected payment.
 $('#payment').val('credit card').change(function() {
@@ -174,14 +182,15 @@ $('button').click(function( event ) {
     event.preventDefault(); // it prevents the refresh of the page.
     const paymentOK = paymentVerification();
     const tshirtOK = tshirtVerification();
+    const activitiesOK = activitiesVerification();
     // const yourPartOK = runyourfunction();
-    if(paymentOK && tshirtOK) { // add your variable here with a && operator
+    if(paymentOK && tshirtOK && activitiesOK) { // add your variable here with a && operator
         // form submitted!
         $('form').append(`<span style="color:green;">
         The form has been submitted! <span>`); // TODO: make sure to add only one message!
     } else {
         // prevent the submition of the form
-        $('form').append(`<span style="color:#FF6666;">
+        $('form').append(`<span class="alert">
         Please fill the form correctly! <span>`); // TODO: make sure to add only one message!
     }
   });

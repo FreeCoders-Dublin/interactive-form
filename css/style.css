@@ -161,12 +161,8 @@ button:hover {
 }
 
 
-.empty {
+.alert {
   color: #FF6666;
-}
-
-.empty + input {
-  border: 2px solid #FF6666;
 }
 
 .disabled {
