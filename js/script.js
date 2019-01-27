@@ -56,6 +56,10 @@ $("#design").focus(function() {
    $("#select-tshirt").remove();
 });
 
+$("#color").focus(function() {
+    $("#select-tshirt").remove();
+ });
+
 let totalValue = 0;
 const $totalValueTag = $(`<h2 class="total">Total: $<span class ="total-to-pay">${totalValue}</span></div>`);
 const $activities = $('.activities');
@@ -161,8 +165,9 @@ tester(name, /\w[^\d]/)
 $('button').click(function( event ) {
     event.preventDefault(); // it prevents the refresh of the page.
     const paymentOK = paymentVerification();
+    const tshirtOK = tshirtVerification();
     // const yourPartOK = runyourfunction();
-    if(paymentOK) { // add your variable here with a && operator
+    if(paymentOK && tshirtOK) { // add your variable here with a && operator
         // form submitted!
         $('form').append(`<span style="color:green;">
         The form has been submitted! <span>`); // TODO: make sure to add only one message!
