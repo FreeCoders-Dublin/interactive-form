@@ -138,15 +138,18 @@ button:hover {
 }
 
 .error-message {
-  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
   bottom: 0px;
   text-align: center;
   width: 100%;
+  /* margin-left: 6rem; */
 }
 
 .error-message > h2 {
   display: none;
-  color: rgb(252, 104, 104);
+  color: #fff;
   font-size: 20px;
   margin: 5px;
   background-color: rgba(255, 154, 154, .5);
@@ -155,7 +158,15 @@ button:hover {
 
 
 .empty {
-  border: 2px solid red;
+  color: #FF6666;
+}
+
+.empty + input {
+  border: 2px solid #FF6666;
+}
+
+.disabled {
+  color: darkgrey;
 }
 /* =================================
   Page Styles

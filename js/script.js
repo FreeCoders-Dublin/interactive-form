@@ -47,35 +47,35 @@ $("#design").change(function () {
 }
 });
 
+// Activities Section
 let totalValue = 0;
-const $totalValueTag = $(`<h2 class="total">Total: $<span class ="total-to-pay">${totalValue}</span></div>`);
-const $activities = $('.activities');
+const $totalValueTag = $(`<h3 class='total-label'>Total: $ <span class='total-value'>${totalValue}</span></h3>`);
 
-$activities.append($totalValueTag);
-
-$activities.on('click', 'input', function(event) {
-  let checkbox = $(this).parent()[0];
-
-  // console.log(checkboxText);
-
-  if (checkbox.innerText.indexOf('Tuesday 9am') >= 0 && $(this).is(':checked')) {
-    $('.activities label:contains("Tuesday 9am")').children().attr("disabled", true);
-    $('.activities label:contains("Tuesday 9am")').css("color", "gray");
-    $(this).removeAttr("disabled");
-    $(this).parent().css("color", 'black');
-  } else if (checkbox.innerText.indexOf('Tuesday 9am') >= 0 && $(this).is(':checked') === false) {
-    $('.activities label:contains("Tuesday 9am")').children().removeAttr("disabled");
-    $('.activities label:contains("Tuesday 9am")').css("color", "black");
+$('.activities').on('change', 'input', function(event) {
+  if ($('.total-label').length === 0) {
+    $('.activities').append($totalValueTag);
+    $('.total-label').hide().fadeIn('slow');
+    $('.total-value').hide().fadeIn('slow');
+  } else if ($('.activities input:checked').length === 0) {
+    $('.total-value').fadeOut('slow');
+    $('.total-label').addClass('empty');
+  } else {
+    $('.total-value').hide().fadeIn('slow');
+    $('.total-label').removeClass('empty');
   }
 
-  if (checkbox.innerText.indexOf('Tuesday 1pm') >= 0 && $(this).is(':checked')) {
-    $('.activities label:contains("Tuesday 1pm")').children().attr("disabled", true);
-    $('.activities label:contains("Tuesday 1pm")').css("color", "gray");
-    $(this).removeAttr("disabled");
-    $(this).parent().css("color", 'black');
-  } else if (checkbox.innerText.indexOf('Tuesday 1pm') >= 0 && $(this).is(':checked') === false) {
-    $('.activities label:contains("Tuesday 1pm")').children().removeAttr("disabled");
-    $('.activities label:contains("Tuesday 1pm")').css("color", "black");
+  if ($(this).parent()[0].innerText.indexOf("Tuesday 9am") >= 0 && $(this).is(':checked')) {
+    $('.activities label:contains("Tuesday 9am")').addClass('disabled').children().attr('disabled', true);
+    $(this).removeAttr('disabled').parent().removeClass('disabled');
+  } else if ($(this).parent()[0].innerText.indexOf("Tuesday 9am") >= 0 && $(this).is(':checked') === false) {
+    $('.activities label:contains("Tuesday 9am")').removeClass('disabled').children().removeAttr('disabled');
+  }
+
+  if ($(this).parent()[0].innerText.indexOf("Tuesday 1pm") >= 0 && $(this).is(':checked')) {
+    $('.activities label:contains("Tuesday 1pm")').addClass('disabled').children().attr('disabled', true);
+    $(this).removeAttr('disabled').parent().removeClass('disabled');
+  } else if ($(this).parent()[0].innerText.indexOf("Tuesday 1pm") >= 0 && $(this).is(':checked') === false) {
+    $('.activities label:contains("Tuesday 1pm")').removeClass('disabled').children().removeAttr('disabled');
   }
 
   totalValue = 0;
@@ -85,11 +85,9 @@ $activities.on('click', 'input', function(event) {
     totalNumber = totalNumber.replace('$', '');
     totalValue += parseInt(totalNumber);
   })
-    $('.total-to-pay').text(totalValue);
+    $('.total-value').text(totalValue);
 }
 );
-//
-// console.log($totalValueTag.innerText);
 
 // To show the correct section releted to the selected payment.
 $('#payment').val('credit card').change(function() {
@@ -165,7 +163,7 @@ $('button').click(function( event ) {
         The form has been submitted! <span>`); // TODO: make sure to add only one message!
     } else {
         // prevent the submition of the form
-        $('form').append(`<span style="color:red;">
+        $('form').append(`<span style="color:#FF6666;">
         Please fill the form correctly! <span>`); // TODO: make sure to add only one message!
     }
   });
