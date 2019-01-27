@@ -109,6 +109,21 @@ $('#payment').val('credit card').change(function() {
     }
 });
 
+const paymentVerification = () => { // verify the field are not empty and with a correct value
+    let cvvIsVerified = /^\d{3}$/.test($('#cvv').val());
+    let zipIsVerified = /^\d{5}$/.test($('#zip').val());
+    let ccIsVerified = /^\d{13,16}$/.test($('#cc-num').val());
+    if(cvvIsVerified && zipIsVerified && ccIsVerified) { // everthing is verified
+        return true;
+    } else { // return false and menage the error messages
+        cvvIsVerified ? $('#cvv').addClass('correct') : $('#cvv').addClass('error');
+        zipIsVerified ? $('#zip').addClass('correct') : $('#zip').addClass('error');
+        ccIsVerified ? $('#cc-num').addClass('correct') : $('#cc-num').addClass('error');
+        return false;
+    }
+}
+
+
 // it showes the user if the {{input}} matches the {{regex}}.
 const tester = ($input, regex, id) => {
     $input.keyup(function(event){
@@ -133,18 +148,24 @@ const tester = ($input, regex, id) => {
     });
 }
 
-// it showes the user if the {{input}} matches the {{regex}}.
+tester($('#cvv'),/^\d{3}$/);
+tester($('#zip'),/^\d{5}$/);
+tester($('#cc-num'),/^\d{13,16}$/);
+tester(eMail,testerEmail);
+tester(name, /\w[^\d]/)
 
 
-tester($('#cvv'),/^\d{3}$/, "#cvv-error");
-tester($('#zip'),/^\d{5}$/, "#zip-error");
-tester($('#cc-num'),/^\d{13,16}$/, "#cc-error");
-tester(eMail,testerEmail, "#email-error");
-tester(name, /\w[^\d]/, "#name-error");
-
-
-$('button').click(function() {
-  if(document.querySelector('empty')) {
-    console.log('w la figa');
-  }
-})
+$('button').click(function( event ) {
+    event.preventDefault(); // it prevents the refresh of the page.
+    const paymentOK = paymentVerification();
+    // const yourPartOK = runyourfunction();
+    if(paymentOK) { // add your variable here with a && operator
+        // form submitted!
+        $('form').append(`<span style="color:green;">
+        The form has been submitted! <span>`); // TODO: make sure to add only one message!
+    } else {
+        // prevent the submition of the form
+        $('form').append(`<span style="color:red;">
+        Please fill the form correctly! <span>`); // TODO: make sure to add only one message!
+    }
+  });
