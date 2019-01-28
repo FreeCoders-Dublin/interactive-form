@@ -1,8 +1,3 @@
-$('input').each(function() {
-  $(this).addClass('empty')
-});
-
-
 //when the page loads the first field is focused by default
 const name = $('#name');
 const eMail =  $('#mail');
