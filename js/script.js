@@ -199,11 +199,13 @@ tester(name, /\w[^\d]/)
 
 $('button').click(function( event ) {
     event.preventDefault(); // it prevents the refresh of the page.
-    const paymentOK = paymentVerification();
+    let paymentOK = paymentVerification();
     const tshirtOK = tshirtVerification();
     const activitiesOK = activitiesVerification();
     const generalInfoOK = generalInfoVerification();
-    // const yourPartOK = runyourfunction();
+    if ($('#payment').val() === "bitcoin" || $('#payment').val() === "paypal") {
+      paymentOK = true;
+    }
     if(paymentOK && tshirtOK && activitiesOK && generalInfoOK) { // add your variable here with a && operator
         // form submitted!
         $('form').append(`<span style="color:green;">
