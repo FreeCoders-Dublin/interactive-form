@@ -185,11 +185,11 @@ const tester = ($input, regex, id) => {
     });
 }
 
-tester($('#cvv'),/^\d{3}$/);
-tester($('#zip'),/^\d{5}$/);
-tester($('#cc-num'),/^\d{13,16}$/);
-tester(eMail,testerEmail);
-tester(name, /\w[^\d]/)
+tester($('#cvv'),/^\d{3}$/, "#cvv-error");
+tester($('#zip'),/^\d{5}$/, "#zip-error");
+tester($('#cc-num'),/^\d{13,16}$/, "#cc-error");
+tester(eMail,testerEmail, "#email-error");
+tester(name, /\w[^\d]/, "#name-error")
 
 
 $('button').click(function( event ) {
@@ -203,11 +203,19 @@ $('button').click(function( event ) {
     }
     if(paymentOK && tshirtOK && activitiesOK && generalInfoOK) { // add your variable here with a && operator
         // form submitted!
-        $('form').append(`<span style="color:green;">
-        The form has been submitted! <span>`); // TODO: make sure to add only one message!
+        if(!document.querySelector('#success')) {
+          $('form').append(`<span id="success" style="color:green;">
+          The form has been submitted! <span>`);
+        }
+       // TODO: make sure to add only one message!
     } else {
+      if(!document.querySelector('#failure')) {
+
         // prevent the submition of the form
-        $('form').append(`<span class="alert">
+        $('form').append(`<span id="failure" class="alert">
         Please fill the form correctly! <span>`); // TODO: make sure to add only one message!
+
+      }
+
     }
   });
