@@ -162,7 +162,8 @@ button:hover {
 
 
 .alert {
-  color: #FF6666;
+	color: #FF6666;
+	padding: 10px;
 }
 
 .disabled {

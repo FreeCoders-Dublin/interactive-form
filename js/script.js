@@ -63,7 +63,9 @@ $("#design").change(function () {
 // red error message pops up when users don't select all mandatory fields
 const tshirtVerification = () => {
     if ( ($("#design").val() === "select theme") || (!$("#color").val()) ) {
-        $(".shirt").append( "<span id='select-tshirt'>Please select a valid option</span>");
+        if(!document.querySelector('#select-tshirt')) {
+            $(".shirt").append( "<span id='select-tshirt'>Please select a valid option</span>");
+        }
         return false;
     } else {
 		return true;
@@ -121,9 +123,12 @@ $('.activities').on('change', 'input', function(event) {
 const activitiesVerification = () => {
   let activitiesIsVerified = $('.total-value').text() > 0;
   if(activitiesIsVerified) {
+      $('#no-activities').remove();
     return true;
   } else {
-    activitiesIsVerified ? $('.total-label').addClass('correct') : $('.total-label').addClass('alert'), $('.activities').append('<span class="alert">Select at least one activity</span>');
+        if(!document.querySelector('#no-activities')) {
+        activitiesIsVerified ? $('.total-label').addClass('correct') : $('.total-label').addClass('alert'), $('.activities').append('<span class="alert" id="no-activities">Select at least one activity</span>');
+        }
     return false;
   }
 }
@@ -204,13 +209,18 @@ $('button').click(function( event ) {
     if(paymentOK && tshirtOK && activitiesOK && generalInfoOK) { // add your variable here with a && operator
         // form submitted!
         if(!document.querySelector('#success')) {
-          $('form').append(`<span id="success" style="color:green;">
+          if($('#failure')) {
+            $('#failure').remove();
+          }
+          $('form').append(`<span id="success" style="color:green; padding:10px;">
           The form has been submitted! <span>`);
         }
        // TODO: make sure to add only one message!
     } else {
       if(!document.querySelector('#failure')) {
-
+        if($('#success')) {
+            $('#success').remove();
+          }
         // prevent the submition of the form
         $('form').append(`<span id="failure" class="alert">
         Please fill the form correctly! <span>`); // TODO: make sure to add only one message!
